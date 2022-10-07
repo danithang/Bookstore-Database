@@ -1,0 +1,184 @@
+/* Creation of Bookstore database*/
+CREATE DATABASE [BOOKSTORE]
+
+/* Creation of Table Customer with primary key and data types*/
+CREATE TABLE [CUSTOMER] (
+CUS_ID int PRIMARY KEY NOT NULL,
+CUS_LNAME varchar (255) NOT NULL,
+CUS_FNAME varchar (255) NOT NULL,
+CUS_ADDRESS varchar (255) NOT NULL,
+CUS_PHONE varchar (255) );
+
+/* Command to insert data within Customer table */
+INSERT INTO CUSTOMER (CUS_ID, CUS_LNAME, CUS_FNAME, CUS_ADDRESS, CUS_PHONE)
+VALUES	(254, 'Sanders', 'Cathy', '456 Lovely Trail, Norfolk VA 23546', '757-235-4958'),
+		(878, 'Doe', 'Jake', '675 Rush Ave., Sacramento, CA 90384', '678-498-5422'),
+		(65, 'Conner', 'Sam', '83 Ventura Blvd., Alamogordo, NM 88330',	'505-304-1743'),
+		(35, 'Webber', 'Charlotte', '526 Popover Ave., Hanover, NH 03755', '603-697-8745'),
+		(98, 'Jackson',	'Aiden', '668 Juban Ct., Hanover, NH 03755', '603-333-9965');
+    
+/* Creation of Employee table with primary key and data types */ 
+CREATE TABLE [EMPLOYEE] (
+EMP_ID int PRIMARY KEY NOT NULL,
+EMP_LNAME varchar (255) NOT NULL,
+EMP_FNAME varchar (255) NOT NULL,
+EMP_ADDRESS varchar (255) NOT NULL,
+EMP_PHONE varchar (255) NOT NULL,
+EMP_JOBTITLE varchar (255) NOT NULL,
+EMP_PAY decimal (4,2) NOT NULL);
+
+/* Command to insert data within the Employee table*/
+INSERT INTO EMPLOYEE (EMP_ID, EMP_LNAME, EMP_FNAME, EMP_ADDRESS, EMP_PHONE, EMP_JOBTITLE, EMP_PAY)
+VALUES	(56, 'Parker', 'Carl', '123 Sandy Drive, Hanover, NH 03755', '603-456-7890', 'Stocker', '14.00'),
+		(25, 'Bailey', 'Kristy', '434 Lovett Lane, Hanover, NH 03755', '603-234-4857', 'Cashier', '15.50'),
+		(48, 'Pope', 'Donald', '675 Morsley Ave, Hanover, NH 03755', '603-394-5676', 'Cashier',	'15.75'),
+		(99, 'January', 'Kathleen', '988 Sandstone Pl. Hanover, NH 03755', '603-856-9898', 'Cashier', '15.25'),
+		(87, 'Klein', 'Sheila', '324 Smith Ave. Hanover, NH 03755', '603-864-5759', 'Stocker', '14.50');
+    
+/*Creation of Payment table with primary key and data types*/
+CREATE TABLE [PAYMENT] (
+PAY_TRANUM int PRIMARY KEY NOT NULL,
+PAY_MET varchar (255) NOT NULL,
+PAY_PROCESS varchar (255) NOT NULL,
+PAY_CON varchar (255) NOT NULL);
+
+/* Command to insert data into Payment table */
+INSERT INTO PAYMENT (PAY_TRANUM, PAY_MET, PAY_PROCESS, PAY_CON)
+VALUES	(7675, 'Visa', 'Confirmed', '76758907'),
+		(3948, 'Mastercard', 'Confirmed', '39483345'),
+		(1243, 'Cash',	'Confirmed',	'12434943'),
+		(6585, 'American Express', 'Confirmed', '96364789'),
+		(7848, 'Cash', 'Confirmed', '54854178');
+    
+/* Creation of Author table with primary key and data types */
+CREATE TABLE [AUTHOR] (
+AUT_REFNUM int PRIMARY KEY NOT NULL,
+AUT_LNAME varchar (255), 
+AUT_FNAME varchar (255) );
+
+/* Command to insert data into the Author table */
+INSERT INTO AUTHOR (AUT_REFNUM, AUT_LNAME, AUT_FNAME)
+VALUES	(1234, 'N/A', 'N/A'),
+		(5674,	'James', 'E.L.'),
+		(1285, 'N/A', 'N/A'),
+		(2585, 'Eugenides', 'Jeffrey'),
+		(2365,	'Carroll',	'Michael');
+    
+/* Creation of Publisher table with primary key and data types */
+CREATE TABLE [PUBLISHER] (
+PUB_ID int PRIMARY KEY NOT NULL,
+PUB_NAME varchar (255) );
+
+/* Command to insert data into Publisher table */
+INSERT INTO PUBLISHER (PUB_ID, PUB_NAME)
+VALUES	(1234, 'Time Inc.'),
+		(4566, 'Vintage Books'),
+		(1285, 'Conde Mast'),
+		(3564, 'Picador'),
+		(9658, 'Penguin Young Readers Philomel');
+    
+/* Creation of Produce table with primary key and data types */ 
+CREATE TABLE [PRODUCE] (
+PROD_UPC int PRIMARY KEY NOT NULL,
+PASTRY varchar (255),
+COFFEE varchar (255),
+GIFTS varchar (255),
+PROD_COST decimal (6,2));
+
+/* Command to insert data into Produce table */
+INSERT INTO PRODUCE (PROD_UPC, PASTRY, COFFEE, GIFTS, PROD_COST)
+VALUES	(68987896, 'Scone', 'N/A',	'N/A',	'2.99'),
+		(44996585, 'N/A', 'N/A', 'Coffee Mug Gift Basket', '29.99'),
+		(84675254, 'N/A', 'Large Decaf', 'N/A', '3.99'),
+		(96547285, 'N/A', 'N/A', 'Pastry Gift Basket', '16.99'),
+		(84675255, 'N/A', 'Large Mocha', 'N/A', '3.99');
+    
+/*Creation of Product table with primary keys, foreign keys, and data types */
+CREATE TABLE [PRODUCT] (
+PRO_UPC int PRIMARY KEY NOT NULL,
+BOOK_TITLE varchar (255),
+MAG_NAME varchar (255),
+AUT_REFNUM int FOREIGN KEY REFERENCES AUTHOR (AUT_REFNUM),
+PUB_ID int FOREIGN KEY REFERENCES PUBLISHER (PUB_ID),
+PRO_COST decimal (6,2) );
+
+/* Command to insert data within the Product table */
+INSERT INTO PRODUCT (PRO_UPC, BOOK_TITLE, MAG_NAME, AUT_REFNUM, PUB_ID, PRO_COST)
+VALUES	(25888963, 'N/A', 'People Magazine', '1234', '1234', '4.99'),
+		(12365478, '50 Shades of Grey', 'N/A', '5674', '4566', '19.99'),
+		(32665688, 'N/A', 'Vogue', '1285', '1285', '4.99'),
+		(56435252, 'Middlesex', 'N/A', '2585', '3564', '14.99'),
+		(16369825, 'The Awakening', 'N/A', '2365', '9658', '12.99');
+    
+/* Creation of Store table with primary key and data types */
+CREATE TABLE [STORE] (
+STO_NUM int PRIMARY KEY NOT NULL,
+STO_NAME varchar (255) NOT NULL);
+
+/* Command to create unique nonclustered index for table Store to turn on ignore duplication key so primary key can be duplicated */ 
+CREATE UNIQUE NONCLUSTERED INDEX [IX_DupIndex_STO_NUM]
+ON [STORE] (
+[STO_NUM] ASC) 
+WITH (IGNORE_DUP_KEY = ON) ON [PRIMARY]
+
+/* Command to insert data witin table Store */
+INSERT INTO STORE (STO_NUM, STO_NAME)
+VALUES	(1, 'Books R Us'),
+		(3, 'Online'),
+		(2,	'Great Books, USA'),
+		(1, 'Books R Us'),
+		(2,	'Great Books, USA');
+    
+/* Creation of Order table with primary keys, foreign keys and data types */
+CREATE TABLE [ORDER] (
+ORD_NUM int PRIMARY KEY NOT NULL,
+CUS_ID int FOREIGN KEY REFERENCES CUSTOMER (CUS_ID) NOT NULL,
+EMP_ID int FOREIGN KEY REFERENCES EMPLOYEE (EMP_ID) NOT NULL,
+STO_NUM int FOREIGN KEY REFERENCES STORE (STO_NUM) NOT NULL,
+PAY_TRANUM int FOREIGN KEY REFERENCES PAYMENT (PAY_TRANUM) NOT NULL,
+ORD_DATE date NOT NULL);
+
+/* Command to insert data in the Order table */
+INSERT INTO [ORDER] (ORD_NUM, CUS_ID, EMP_ID, STO_NUM, PAY_TRANUM, ORD_DATE)
+VALUES	(45654, 254, 56, 1,	7675, '3/23/2015'),
+		(56765, 878, 25, 3,	3948, '6/30/2015'),
+		(87657, 65, 48, 2,	1243, '10/1/2015'),
+		(28456, 35, 99, 1,	6585, '1/6/2015'),
+		(64656, 98, 87, 2,	7848, '3/15/2015');
+    
+/* Creation of Order Details table with primary keys, foreign keys, and data types */
+CREATE TABLE [ORDER DETAILS] (
+LINE_NUM int NOT NULL,
+ORD_NUM int FOREIGN KEY REFERENCES [ORDER] (ORD_NUM) NOT NULL,
+PRO_UPC int FOREIGN KEY REFERENCES PRODUCT (PRO_UPC),
+PROD_UPC int FOREIGN KEY REFERENCES PRODUCE (PROD_UPC),
+CUS_ID int FOREIGN KEY REFERENCES CUSTOMER (CUS_ID) NOT NULL,
+ORD_PRICE decimal (6,2) NOT NULL,
+QTY_ORD int NOT NULL,
+PRIMARY KEY (LINE_NUM, ORD_NUM));
+
+/* Command to insert data in Order Details table */
+INSERT INTO [ORDER DETAILS] (LINE_NUM, ORD_NUM, PRO_UPC, PROD_UPC, CUS_ID, ORD_PRICE, QTY_ORD)
+VALUES	(1, 45654, 25888963, 68987896, 254, '7.98', 2),
+		(2, 56765, 12365478, 44996585, 878, '49.98', 2),
+		(3, 87657, 32665688, 84675254, 65, '8.98', 2),
+		(4, 28456, 56435252, 96547285, 35, '31.98', 2),
+		(5, 64656, 16369825, 84675254, 98, '16.98', 2);
+    
+/* Creation of Inventory table with primary keys, foreign keys, and data types */
+CREATE TABLE [INVENTORY] (
+PRO_UPC int FOREIGN KEY REFERENCES PRODUCT (PRO_UPC) NOT NULL,
+PROD_UPC int FOREIGN KEY REFERENCES PRODUCE (PROD_UPC)NOT NULL,
+STO_NUM int FOREIGN KEY REFERENCES STORE (STO_NUM) NOT NULL,
+QTY_ORD int NOT NULL,
+PRIMARY KEY (PRO_UPC, PROD_UPC, STO_NUM) );
+
+/* Command to insert data in the Inventory table */
+INSERT INTO INVENTORY (PRO_UPC, PROD_UPC, STO_NUM, QTY_ORD)
+VALUES	(25888963, 68987896, 1, 2),
+		(12365478, 44996585, 3, 2),
+		(32665688, 84675254, 2, 2),
+		(56435252, 96547285, 1, 2),
+		(16369825, 84675255, 2, 2);
+    
+/*Astra Berry 11/8/2015 */
